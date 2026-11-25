@@ -6,3 +6,6 @@ knowledge-packs/
 *.pdf
 *.epub
 *.docx
+private-evidence/
+parser-output/
+extraction-runs/

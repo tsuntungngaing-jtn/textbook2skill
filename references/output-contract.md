@@ -12,3 +12,5 @@ New output directory, default knowledge pack:
 Starter skeleton: `python scripts/init_pack.py <new-directory>`. Edit structured files using real sources. Structural validation: `python scripts/validate_pack.py <directory>`. PASS only confirms field/ID/locator format and source ID consistency, not factual correctness.
 
 For a public repository deliver only original rule descriptions, lawful metadata, formulas/independent implementations where permitted, and redistributable data. Keep raw books, extracted full text, OCR, protected tables and images outside the repository. Maintain explicit rights and source access status.
+
+Optional local PDF sidecar v0.2.0: manifest.json, native pages.json and PNGs, or semantic document.json and element crops/Markdown. Bind to source SHA-256 and 1-based physical page locators. Public knowledge pack contains only lawful original summaries, provenance and review status, not raw pages or complete extracts. Existing pack schema unchanged.
