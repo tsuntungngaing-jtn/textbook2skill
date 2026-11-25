@@ -1,4 +1,4 @@
-# Textbook-to-Skill v0.2.0
+# Textbook-to-Skill v0.2.4
 
 A reusable agent workflow for transforming accessible textbooks into original, evidence-linked knowledge assets. Includes local native PDF extraction and an optional Docling semantic parsing adapter; not a model trainer or automatic correctness guarantee.
 
@@ -9,7 +9,7 @@ Example: 请使用 $textbook-to-skill 学习我提供的 DFMA 教材，目标为
 
 Initialize an empty output: `python scripts/init_pack.py ./my-knowledge-pack` (path must not exist). Validate structure: `python scripts/validate_pack.py ./my-knowledge-pack`. Run included synthetic tests: `python -m unittest discover -s evals -v`.
 
-The tests cover the pack tools only. Actual extraction, source review, formula implementation, domain evaluations and integration require the supplied textbook and a capable agent. No textbook has been ingested in this release. No external service or model API is required by the two bundled scripts.
+Tests cover pack tools and synthetic extraction cases. Actual extraction, source review, formula implementation, domain evaluations and integration require the supplied textbook and a capable agent. No textbook has been ingested in this release. No external service or model API is required by the two bundled scripts.
 
 ## PDF extraction v0.2.0
 
@@ -24,4 +24,10 @@ python scripts/extraction_metrics.py gold.json predictions.json
 python -m unittest discover -s evals -v
 ```
 
-Docling is an optional local backend; first use may fetch model weights. See [PDF pipeline](references/pdf-pipeline.md) for preflight, evidence, scans, figure crops and review; [evaluation](references/extraction-evaluation.md) for metrics. MinerU is an optional independent external route, not bundled as an executable adapter. Source text/images and intermediate outputs stay private. Real textbook accuracy and semantic backend runtime have not yet been established. Existing pack schema remains compatible.
+Docling is an optional local backend; first use may fetch model weights. See [PDF pipeline](references/pdf-pipeline.md) for preflight, evidence, scans, figure crops and review; [evaluation](references/extraction-evaluation.md) for metrics. MinerU 4.x is now available via a local optional adapter. Source text/images and intermediate outputs stay private. Real textbook accuracy and semantic backend runtime have not yet been established. Existing pack schema remains compatible.
+
+## v0.2.4 — integrated extraction suite
+
+See [extraction suite](references/extraction-suite.md) for commands, upstream projects, data formats, review gates and limitations. Four development directions are implemented at a foundational level: local MinerU 4.x invocation and normalized page comparison; calibrated color-based chart extraction; strict engineering-field scoring; frozen dev/holdout evaluation. This is an implementation milestone, not an accuracy-certified release. The five new synthetic tests pass locally; MinerU and Docling were not installed in that environment; real textbook holdout and official external benchmark results remain NOT_RUN.
+
+Install appropriate optional dependencies separately: `pip install -r requirements-pdf.txt`; for charts, `pip install -r requirements-chart.txt`. Install MinerU 4.x using upstream instructions in a dedicated environment. Run `python -m unittest discover -s evals -v`.
