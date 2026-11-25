@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.venv/
+local-library/
+knowledge-packs/
+*.pdf
+*.epub
+*.docx

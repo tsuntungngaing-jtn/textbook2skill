@@ -1,0 +1,4 @@
+interface:
+  display_name: "Textbook to Skill"
+  short_description: "Build source-grounded knowledge packs and domain-agent skills"
+  default_prompt: "Use $textbook-to-skill to convert the provided textbook into a source-grounded knowledge pack with rules, formulas, workflows, evidence, and validation."

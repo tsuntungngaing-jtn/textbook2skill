@@ -1,0 +1,16 @@
+{
+  "id": "DEMO-R001",
+  "title": "Example: missing required input prevents a decision",
+  "evidence": [],
+  "support": "inference",
+  "status": "candidate",
+  "content": {
+    "trigger": "A design choice needs a documented input",
+    "required_inputs": ["required parameter and its units"],
+    "predicate": "Required parameter not available",
+    "action": "Mark option unresolved",
+    "exceptions": [],
+    "unknown_behavior": "Request evidence or retain unknown status",
+    "validation": "Test a case where the input is intentionally missing"
+  }
+}
