@@ -1,0 +1,22 @@
+# Collaborative learning and evaluation v0.3.0
+
+References: Stanford STORM/Co-STORM (https://github.com/stanford-oval/storm), LangGraph (https://github.com/langchain-ai/langgraph), GraphRAG-Bench (https://github.com/GraphRAG-Bench/GraphRAG-Benchmark), PaperQA2/LitQA2 (https://github.com/Future-House/paper-qa). Use as architectural/evaluation references; no native runtime integration or external benchmark execution in this release.
+
+## Coordinator and roles
+Coordinator is sole writer of task ledger and approved knowledge pack. Extraction: original regions and candidate text. Chapter: original conceptual synthesis, assumptions, formulas and rules. Graph: align aliases and propose evidence-linked edges. Math: verify units, derivations and numerical test cases. Verification: independently read source before seeing claim. Conflict: compare same quantities/conditions and source lineage, record disagreement or unknown. Adjudication: resolve by original evidence, preserve blocked items and review trail, never vote. Evaluation: frozen unseen cases, not accessible to other roles before outputs freeze.
+
+Start ordinary chapters with one agent; start graph on cross-chapter links, math for quantitative rules, separate verifier for critical claims, conflict role only for incompatible evidence, adjudication before publication. If host supports actual subagents, assign isolated workspaces and neutral source scopes; otherwise perform sequential phases and mark independence not established. Do not pretend roles are separately running agents. No external agent launcher bundled.
+
+## Task ledger
+Example plan: {"tasks":[{"id":"chapter1","role":"chapter","scope":"ch1","depends_on":[]},{"id":"verify1","role":"verification","scope":"ch1","depends_on":["chapter1"]}]}
+Use:
+- python scripts/knowledge_cli.py init-state plan.json state.json
+- python scripts/knowledge_cli.py ready plan.json state.json WORKSPACE
+- python scripts/knowledge_cli.py transition plan.json state.json WORKSPACE transition.json
+
+Transition request: {"task":"chapter1","status":"RUNNING","worker":"A"}; completion: {"task":"chapter1","status":"DONE","worker":"A","outputs":["chapter1.json"]}. Outputs must exist under workspace; complete artifacts hashed. For FAILED/BLOCKED or requeue PENDING supply reason. A RUNNING verifier cannot use the same worker ID as already-complete claim authors in the same scope. Actual access isolation and neutral review enforced by host and coordinator. No parallel writes to state; atomic replacement is not distributed locking. On resume use ready command to verify plan and artifact hashes. A stale RUNNING task requires inspection and explicit FAILED or BLOCKED then PENDING; don't rerun blindly. Changed completed artifacts fail verification; preserve old checkpoint and create a new plan/state for affected work. Retain independent logs, task IDs and actual source hashes.
+
+## Independent evaluation
+Use fixed unseen cases with same inputs, model version, budget, rubric, evaluation personnel and task conditions. Compare v0.2.4 baseline, + graph, + evidence review, + cross-book checks, + collaborative workflow as incremental ablations. Control retrieval/token budgets or report differences. Distinguish graph edge precision/recall, retrieval recall@k, source citation validity, formula/unit correctness, conflict recognition, unsupported claim rate and downstream decision correctness. Critical engineering mistakes are separately reported and cannot be hidden by aggregate score.
+
+Plan JSON: {"cases":[{"id":"heldout-01","split":"holdout"}],"metrics":["edge_correct","decision_correct"]}. Include source hashes, freeze split and gold separately; ensure dev pages/cases/near duplicates cannot enter holdout. CLI hash-plan prints canonical SHA. Run JSON: {"plan_sha256":"...","configuration":"frozen configuration identifier","results":[{"id":"heldout-01","scores":{"edge_correct":1,"decision_correct":0}}]}. Scores are independent rubric judgments in [0,1], not agent self-ratings. CLI ablation PLAN BASELINE CANDIDATE returns paired descriptive deltas, counts and missing cases (scored zero under this protocol). It does not generate gold, enforce access isolation, calculate significance or establish causality. Keep costs, runtime, raw scoring rationale and independent reviewer in audit records. Do not report external framework benchmark results as this project's results. Real textbook holdout not yet run.

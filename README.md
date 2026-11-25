@@ -1,4 +1,4 @@
-# Textbook-to-Skill v0.2.4
+# Textbook-to-Skill v0.3.0
 
 A reusable agent workflow for transforming accessible textbooks into original, evidence-linked knowledge assets. Includes local native PDF extraction and an optional Docling semantic parsing adapter; not a model trainer or automatic correctness guarantee.
 
@@ -31,3 +31,11 @@ Docling is an optional local backend; first use may fetch model weights. See [PD
 See [extraction suite](references/extraction-suite.md) for commands, upstream projects, data formats, review gates and limitations. Four development directions are implemented at a foundational level: local MinerU 4.x invocation and normalized page comparison; calibrated color-based chart extraction; strict engineering-field scoring; frozen dev/holdout evaluation. This is an implementation milestone, not an accuracy-certified release. The five new synthetic tests pass locally; MinerU and Docling were not installed in that environment; real textbook holdout and official external benchmark results remain NOT_RUN.
 
 Install appropriate optional dependencies separately: `pip install -r requirements-pdf.txt`; for charts, `pip install -r requirements-chart.txt`. Install MinerU 4.x using upstream instructions in a dedicated environment. Run `python -m unittest discover -s evals -v`.
+
+## v0.3.0 — knowledge graph, decision and collaborative learning
+
+This release integrates the planned v0.3–v0.6 development directions into one foundational implementation. See [knowledge system](references/knowledge-system.md) and [collaborative learning](references/collaborative-learning.md). The previous PDF extraction and pack tools remain available.
+
+Local CLI: `python scripts/knowledge_cli.py --help`. Optional cross-unit comparisons: install `requirements-knowledge.txt` in a suitable environment. Run tests with `python -m unittest discover -s evals -v`. The new modules use a lightweight local graph, typed predicate checks, reviewer evidence records, resumable task ledger and paired scores; they do not train a model, automatically launch subagents, run external GraphRAG/PaperQA/LangGraph systems, or verify real textbooks by themselves.
+
+New synthetic test cases are provided. Runtime and real textbook accuracy must be verified separately; this release does not claim measured downstream improvement.

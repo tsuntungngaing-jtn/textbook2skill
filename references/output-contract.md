@@ -14,3 +14,6 @@ Starter skeleton: `python scripts/init_pack.py <new-directory>`. Edit structured
 For a public repository deliver only original rule descriptions, lawful metadata, formulas/independent implementations where permitted, and redistributable data. Keep raw books, extracted full text, OCR, protected tables and images outside the repository. Maintain explicit rights and source access status.
 
 Optional local PDF sidecar v0.2.0: manifest.json, native pages.json and PNGs, or semantic document.json and element crops/Markdown. Bind to source SHA-256 and 1-based physical page locators. Public knowledge pack contains only lawful original summaries, provenance and review status, not raw pages or complete extracts. Existing pack schema unchanged.
+
+## Optional knowledge-system sidecars (v0.3.0)
+For graph-enabled packs deliver `knowledge-graph.json`, claim/review records, decision requests/results, task plan/state (private if sensitive), and ablation plans/results when actually executed. Follow knowledge-system.md and collaborative-learning.md. Existing source-index and JSONL files remain primary pack inputs; graph source IDs and hashes must be reconciled to them. Do not call a structural graph pass semantic verification. Use only original paraphrases and lawful locators in public packs.

@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.3.0
+- Typed evidence-linked graph, prerequisite DAG checks and bounded multi-hop retrieval.
+- Local evidence search, independent review adjudication and scope-aware quantitative comparison; optional Pint.
+- Reviewed-node-bound typed numerical hard-constraint engine with explicit unknown/fail status.
+- Role/task dependency ledger, worker separation, artifact hashing, atomic checkpoints, paired ablation scoring.
+- New CLI, specifications and synthetic tests. External graph/retrieval/multi-agent frameworks remain reference architectures; no automatic subagent runtime or real textbook evaluation claim.
+- Preserve v0.2.4 PDF extraction and existing knowledge pack formats.
+
+
 ## v0.2.4 — integrated 0.2.1–0.2.4 implementation
 - Local optional MinerU 4.x ZIP CLI, physical page map, structured content normalization, page text disagreement.
 - Orthogonal XY chart color selection, linear/log calibration, ambiguous/missing column reporting, candidate data only.
